@@ -12,10 +12,10 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true,
-    "source.fixAll.stylelint": true,
-    "source.fixAll.prettier": true,
-    "source.fixAll.eslint": true
+    "source.fixAll.tslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.fixAll.prettier": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "search.exclude": {
     "**/node_modules": true,
