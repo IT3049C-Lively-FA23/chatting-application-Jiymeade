@@ -2,15 +2,61 @@ const nameInput = document.getElementById("my-name-input");
 const myMessage = document.getElementById("my-message");
 const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
+const saveNameButton = document.getElementById("save-name-button");
+const modifyNameButton = document.getElementById("modify-name-button");
 
 const serverURL = `https://it3049c-chat.fly.dev/messages`;
 const MILLISECONDS_IN_TEN_SECONDS = 10000;
 
+function isNameSaved() {
+    return localStorage.getItem("savedName") !== null;
+}
+
+
+function updateInputAndButtonState() {
+    const savedName = isNameSaved();
+    myMessage.disabled = !savedName;
+    sendButton.disabled = !savedName;
+}
+
+
+saveNameButton.addEventListener("click", function () {
+    const enteredName = nameInput.value.trim();
+
+    if (enteredName !== "") {
+        localStorage.setItem("savedName", enteredName);
+        updateInputAndButtonState();
+    }
+});
+
+modifyNameButton.addEventListener("click", function () {
+    const newUsername = prompt("Enter your new username:");
+
+    if (newUsername !== null && newUsername.trim() !== "") {
+        localStorage.setItem("savedName", newUsername.trim());
+        updateInputAndButtonState();
+    }
+});
+
+
+updateInputAndButtonState();
+
+
+sendButton.addEventListener("click", function () {
+    const sender = localStorage.getItem("savedName");
+    const message = myMessage.value.trim();
+
+    if (sender && message !== "") {
+        sendMessages(sender, message);
+        myMessage.value = "";
+    }
+});
+
 
 async function fetchMessages() {
-            const response = await fetch(serverURL);
-            return response.json();
-        }
+    const response = await fetch(serverURL);
+    return response.json();
+}
 
 function formatMessage(message, myNameInput) {
     const time = new Date(message.timestamp);
@@ -26,7 +72,7 @@ function formatMessage(message, myNameInput) {
                 ${formattedTime}
             </div>
         </div>
-       ` ;
+       `;
     } else {
         return `
             <div class="yours messages">
@@ -40,18 +86,22 @@ function formatMessage(message, myNameInput) {
         `;
     }
 }
+
+
 async function updateMessages() {
-            const messages = await fetchMessages();
-            let formattedMessages = "";
-            messages.forEach(message => {
-                formattedMessages += formatMessage(message, nameInput.value);
-            });
-            chatBox.innerHTML = formattedMessages;
-        }
-        updateMessages();
-        setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
-       
-        function sendMessages(username, text) {
+    const messages = await fetchMessages();
+    let formattedMessages = "";
+    messages.forEach(message => {
+        formattedMessages += formatMessage(message, nameInput.value);
+    });
+    chatBox.innerHTML = formattedMessages;
+}
+
+
+setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
+
+
+function sendMessages(username, text) {
     const newMessage = {
         sender: username,
         text: text,
@@ -79,11 +129,3 @@ async function updateMessages() {
         console.error('Error sending message:', error);
     });
 }
-        sendButton.addEventListener("click", function(sendButtonClickEvent) {
-            sendButtonClickEvent.preventDefault();
-            const sender = nameInput.value;
-            const message = myMessage.value;
-
-            sendMessages(sender, message);
-            myMessage.value = "";
-        });

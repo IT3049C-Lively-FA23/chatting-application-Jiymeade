@@ -18,14 +18,11 @@ how many points out of 20 do you deserve on this assignment: 20/20
 
 ## Self-Reflection:
 <!-- Write your self-reflection under this line -->
-I blame my lack of knowing and recognizing when I spell something wrong. Coding plans are put to recongnize the bigger goal and then not messing up the most small details. You spell something wrong or you forget a ` ` then automatically you wont get the right results. Even if you have soemthing coded right like the submit button, if it doesn't work it might not be the submit button fault like I thought. Coding and I have a love and hate relationship. 
+I believe I did good, though  the placement of where the new added stuff actually counted. So, for example, if i added something and It wasn't in the right place. My screen will tuen back to its original state but not retain any of the information or send the message being asked. 
 
 ### How long it took me to finish this?
-The html and Java took me a day but it was still the basic html start up screen and the send button wasn't working. 
-Then I relalized I spelled something wrong like Second along with this my whole javascript was in my html document. When I moved it and added the rest of my fetch server it worked. That took my about 2-3 hours, so A day and 2-3 hours. 
-
+The html and Java took me a day, though sometimes I forgot adding to the js like buttons or functions need to mean also adding to the html for the fuction/action to actually work. 
 
 ## Discussion Questions:
 1. What does the bootstrap `display-4` class do?
-The bootstrap `display-4` makes the heading have a larger font size. Which for example can be classified as a way of making the text prominent in its display like a main title or a headline in magazines. 
-
+The bootstrap `display-4` makes the heading have a larger font size. Which for example can be classified as a way of making the text prominent in its display like a main title or a headline in magazines.
